@@ -30,7 +30,7 @@ task ComputeLD {
     }
     
     output {
-        File MatrixLD = "~{OutPrefix}.ld"
+        File MatrixLD = "~{OutPrefix}.vcor"
     }
 }
 
