@@ -6,6 +6,7 @@ task ComputeLD {
         File psam
         File pgen
         File SampleList
+        String Chromosome
         String OutPrefix
         Float WindowLDkb 
     }
@@ -20,6 +21,7 @@ task ComputeLD {
 
         plink2 \
             --threads 32 \
+            --chr ~{Chromosome} \
             --pvar ~{pvar} \
             --pgen ~{pgen} \
             --psam ~{psam} \
@@ -53,16 +55,20 @@ workflow ComputeLDWorkflow {
         Float WindowLDkb 
     }
     
+    Array[String] Chromosomes = ["chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chr22", "chrX", "chrY"]
+    scatter (Chromosome in Chromosomes) {
     call ComputeLD {
         input:
             pvar = pvar,
             psam = psam,
             pgen = pgen,
+            Chromosome = Chromosome,
             SampleList = SampleList,
             OutPrefix = OutPrefix,
             WindowLDkb = WindowLDkb
+        }
     }
     output {
-        File OutputMatrixLD =  ComputeLD.MatrixLD 
+        Array[File] OutputMatrixLD =  ComputeLD.MatrixLD 
     }
 }
