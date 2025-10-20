@@ -30,13 +30,13 @@ task ComputeLD {
             --ld-window 999999 \
             --ld-window-kb ~{WindowLDkb} \
             --ld-window-r2 0 \
-            --out ~{OutPrefix}
+            --out ~{OutPrefix}.~{Chromosome}    
     >>>
 
    runtime {
         docker: "quay.io/biocontainers/plink2:2.0.0a.6.9--h9948957_0"
-        disks: "local-disk 1000 SSD"
-        memory: "240GB"
+        disks: "local-disk 500 SSD"
+        memory: "64GB"
         cpu: "32"
     }
     
@@ -64,7 +64,7 @@ workflow ComputeLDWorkflow {
             pgen = pgen,
             Chromosome = Chromosome,
             SampleList = SampleList,
-            OutPrefix = OutPrefix,
+            OutPrefix = OutPrefix + "." + Chromosome,
             WindowLDkb = WindowLDkb
         }
     }
