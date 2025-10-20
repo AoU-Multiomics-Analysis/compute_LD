@@ -64,7 +64,7 @@ workflow ComputeLDWorkflow {
             pgen = pgen,
             Chromosome = Chromosome,
             SampleList = SampleList,
-            OutPrefix = OutPrefix + "." + Chromosome,
+            OutPrefix = OutPrefix + "_" + Chromosome,
             WindowLDkb = WindowLDkb
         }
     }
