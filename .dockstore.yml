@@ -2,4 +2,5 @@ version: 1.2
 workflows:
   - subclass: WDL 
     primaryDescriptorPath: workflows/compute_LD.wdl
+    name: PlinkComputeLD
 
