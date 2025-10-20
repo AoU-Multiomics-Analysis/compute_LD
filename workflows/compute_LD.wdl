@@ -13,9 +13,9 @@ task ComputeLD {
     command <<<
         first=$(head -n1 ~{SampleList})
         if [[ "$first" =~ [a-zA-Z] ]]; then
-          tail -n +2 ~{SampleList} | awk '{print $1, $1}' > keep_plink.txt
+          tail -n +2 ~{SampleList} | awk '{print $1}' > keep_plink.txt
         else
-          awk '{print $1, $1}' "$file" > keep_plink.txt
+          awk '{print $1}' "$file" > keep_plink.txt
         fi
 
         plink2 \
