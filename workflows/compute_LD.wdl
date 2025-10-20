@@ -11,6 +11,7 @@ task ComputeLD {
         Float WindowLDkb 
     }
     
+    String ShardPrefix  = OutPrefix + "_" + Chromosome
     command <<<
         first=$(head -n1 ~{SampleList})
         if [[ "$first" =~ [a-zA-Z] ]]; then
@@ -30,7 +31,7 @@ task ComputeLD {
             --ld-window 999999 \
             --ld-window-kb ~{WindowLDkb} \
             --ld-window-r2 0 \
-            --out ~{OutPrefix}    
+            --out ~{ShardPrefix}    
     >>>
 
    runtime {
@@ -41,7 +42,7 @@ task ComputeLD {
     }
     
     output {
-        File MatrixLD = "~{OutPrefix}.vcor"
+        File MatrixLD = "~{ShardPrefix}.vcor"
     }
 }
 
@@ -63,8 +64,8 @@ workflow ComputeLDWorkflow {
             psam = psam,
             pgen = pgen,
             Chromosome = Chromosome,
+            OutPrefix = OutPrefix,
             SampleList = SampleList,
-            OutPrefix = OutPrefix + "_" + Chromosome,
             WindowLDkb = WindowLDkb
         }
     }
