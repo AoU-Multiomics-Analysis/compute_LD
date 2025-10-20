@@ -33,7 +33,7 @@ task ComputeLD {
 
    runtime {
         docker: "quay.io/biocontainers/plink2:2.0.0a.6.9--h9948957_0"
-        disks: "local-disk 500 SSD"
+        disks: "local-disk 1000 SSD"
         memory: "240GB"
         cpu: "32"
     }
