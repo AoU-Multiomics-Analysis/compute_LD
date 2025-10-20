@@ -15,7 +15,7 @@ task ComputeLD {
             --pvar ~{pvar} \
             --pgen ~{pgen} \
             --psam ~{psam} \
-            --r2 \
+            --r2-unphased \
             --ld-window 999999 \
             --ld-window-kb ~{WindowLDkb} \
             --ld-window-r2 0 \
