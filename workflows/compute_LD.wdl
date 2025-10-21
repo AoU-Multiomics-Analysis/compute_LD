@@ -8,7 +8,8 @@ task ComputeLD {
         File SampleList
         String Chromosome
         String OutPrefix
-        Float WindowLDkb 
+        Float WindowLDkb
+        Float ThreshLD
     }
     
     String ShardPrefix  = OutPrefix + "_" + Chromosome
@@ -30,7 +31,7 @@ task ComputeLD {
             --r2-unphased \
             --ld-window 999999 \
             --ld-window-kb ~{WindowLDkb} \
-            --ld-window-r2 0 \
+            --ld-window-r2 ~{ThreshLD} \
             --out ~{ShardPrefix}    
     >>>
 
@@ -53,7 +54,8 @@ workflow ComputeLDWorkflow {
         File pgen
         File SampleList
         String OutPrefix
-        Float WindowLDkb 
+        Float WindowLDkb
+        Float ThreshLD
     }
     
     Array[String] Chromosomes = ["chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chr22"]
@@ -66,7 +68,8 @@ workflow ComputeLDWorkflow {
             Chromosome = Chromosome,
             OutPrefix = OutPrefix,
             SampleList = SampleList,
-            WindowLDkb = WindowLDkb
+            WindowLDkb = WindowLDkb,
+            ThreshLD = ThreshLD
         }
     }
     output {
